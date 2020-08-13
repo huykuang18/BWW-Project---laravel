@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="popular-caption">
-                                <h3><a href="product_details.html">{{$product->product_name}}</a></h3>
+                                <h3><a href="{{asset('shop/product/'.$product->product_id)}}">{{$product->product_name}}</a></h3>
                                 @if($product->price_discount==0)
                                 <span>{{number_format($product->price)}} vnđ</span>
                                 @else

@@ -23,7 +23,11 @@ class PageController extends Controller
 		$brand = Brand::Where('status',1)->get();
 		$product_type = Product::Where('brand_id',$id)->paginate(9);
 		$brand_name = Brand::Where('brand_id',$id)->first();
-		return view('page.showProductBrand',compact('brand','product_type','brand_name'));
+		return view('page.show_product_brand',compact('brand','product_type','brand_name'));
+	}
+	public function getProductDetail($id){
+		$product = Product::Where('product_id',$id)->first();
+		return view('page.product_detail',compact('product'));
 	}
 	public function getAbout(){
 		return view('page.about');
