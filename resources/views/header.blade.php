@@ -28,8 +28,20 @@
                                         <span class="flaticon-search"></span>
                                     </div>
                                 </li>
-                                <li> <a href="{{asset('login')}}"><span class="flaticon-user"></span></a></li>
                                 <li><a href="{{asset('cart')}}"><span class="flaticon-shopping-cart"></span></a> </li>
+                                @if(!session('user'))
+                                <li> <a href="{{asset('login')}}"><span class="flaticon-user"></span></a></li>
+                                @else
+                                <li>
+                                    <div class="dropdown">
+                                        <a id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{asset('login')}}"><span class="flaticon-user">&nbsp;{{session('user')}}</span></a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <a href="{{asset('logout')}}" class="dropdown-item">Đăng xuất</a>
+                                            <a href="{{asset('user')}}" class="dropdown-item">Tài khoản của tôi</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

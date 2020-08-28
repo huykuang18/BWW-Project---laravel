@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>BWW | @yield('title')</title>
+    <title>@yield('title') | BWW</title>
     <base href="{{asset('')}}">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">

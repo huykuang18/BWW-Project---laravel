@@ -60,7 +60,7 @@
                             <div class="popular-img">
                                 <img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="">
                                 <div class="img-cap">
-                                    <span>Thêm vào giỏ</span>
+                                    <a href="{{url('cart/add/'.$product->product_id)}}"><span>Thêm vào giỏ</span></a>
                                 </div>
                                 <div class="favorit-items">
                                     <span class="flaticon-heart"></span>

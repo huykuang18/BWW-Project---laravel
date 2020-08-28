@@ -1,6 +1,11 @@
 @extends('master')
 @section('title','Giỏ hàng')
 @section('content')
+@if(session('cart'))
+<?php
+$products=DB::table('products')->whereIn('product_id',array_keys(session('cart')))->get();
+$total=0;
+?>
 <!-- Hero Area Start-->
 <div class="slider-area ">
   <div class="single-slider slider-height2 d-flex align-items-center">
@@ -8,7 +13,7 @@
       <div class="row">
         <div class="col-xl-12">
           <div class="hero-cap text-center">
-            <h2>Cart List</h2>
+            <h2>Giỏ hàng</h2>
           </div>
         </div>
       </div>
@@ -16,96 +21,101 @@
   </div>
 </div>
 <!--================Cart Area =================-->
-<section class="cart_area section_padding">
-  <div class="container">
-    <div class="cart_inner">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="media">
-                  <div class="d-flex">
-                    <img src="assets/img/gallery/card1.png" alt="" />
+<form method="post" action="{{url('cart/update')}}" id="formCart">
+  @csrf
+  <section class="cart_area section_padding">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($products as $product)
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>{{$product->product_name}}</p>
+                    </div>
                   </div>
-                  <div class="media-body">
-                    <p>Minimalistic shop for multipurpose use</p>
+                </td>
+                <td>
+                  @if($product->price_discount==0)
+                  <h5>{{number_format($product->price)}}</h5>
+                  @else
+                  <h5>{{number_format($product->price_discount)}}</h5>
+                  @endif
+                </td>
+                <td>
+                  <div class="product_count">
+                    <input autocomplete="on" min="1" class="form-control form-control-sm" type="number" name="{{$product->product_id}}number" value='{{session("cart.$product->product_id.number")}}'>
                   </div>
-                </div>
-              </td>
-              <td>
-                <h5>$360.00</h5>
-              </td>
-              <td>
-                <div class="product_count">
-                  <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                  <input class="input-number" type="text" value="1" min="0" max="10">
-                  <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                </div>
-              </td>
-              <td>
-                <h5>$720.00</h5>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="media">
-                  <div class="d-flex">
-                    <img src="assets/img/gallery/card2.png" alt="" />
-                  </div>
-                  <div class="media-body">
-                    <p>Minimalistic shop for multipurpose use</p>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <h5>$360.00</h5>
-              </td>
-              <td>
-                <div class="product_count">
-                  <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                  <input class="input-number" type="text" value="1" min="0" max="10">
-                  <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                </div>
-              </td>
-              <td>
-                <h5>$720.00</h5>
-              </td>
-            </tr>
-            <tr class="bottom_button">
-              <td>
-                <a class="btn_1" href="#">Cập nhật giỏ hàng</a>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>
-                <h5>Tổng tiền</h5>
-              </td>
-              <td>
-                <h5>$2160.00</h5>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="checkout_btn_inner float-right">
-          <a class="btn_1" href="{{asset('shop')}}">Tiếp tục mua hàng</a>
-          <a class="btn_1 checkout_btn_1" href="{{asset('checkout')}}">Đi đến thanh toán</a>
+                </td>
+                <td>
+                  @if($product->price_discount==0)
+                  <h5>{{number_format($product->price*session("cart.$product->product_id.number"))}}</h5>
+                  @else
+                  <h5>{{number_format($product->price_discount*session("cart.$product->product_id.number"))}}</h5>
+                  @endif
+                </td>
+                <td>
+                  <a href="{{url('cart/delete/'.$product->product_id)}}"><img src="source/assets/img/delete.png" alt="xóa" width="30" height="30"></a>
+                </td>
+              </tr>
+              {{-- {{$product->product_id.'=>'.session("cart.$product->product_id.number")}} --}}
+              <?php if ($product->price_discount==0) {
+                $total = $total + $product->price*session("cart.$product->product_id.number");
+              }else{
+                $total = $total + $product->price_discount*session("cart.$product->product_id.number");
+              }
+              ?>
+              @endforeach
+              <tr class="bottom_button">
+                <td>
+                  <input class="btn_1" type="submit" value="Cập nhật giỏ hàng">
+                  <a onclick="return confirm('Bạn muốn xóa giỏ hàng chứ?')" href="{{url('cart/deleteall')}}" class="btn_1">Xóa tất cả</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Tổng tiền</h5>
+                </td>
+                <td>
+                  <h5>{{number_format($total)}}</h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="{{asset('shop')}}">Tiếp tục mua hàng</a>
+            <a class="btn_1 checkout_btn_1" href="{{asset('checkout')}}">Đi đến thanh toán</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </form>
+
   <!--================End Cart Area =================-->
+  @else
+  <section class="alert alert-danger" style="text-align: center; margin:10%;">Giỏ hàng trống</section>
+  @endif
   @endsection

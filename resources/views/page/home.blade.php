@@ -14,7 +14,7 @@
                             <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">Những xu hướng mới nhất luôn đi kèm với chất lượng sản phẩm thể hiện đẳng cấp và cá tính riêng của bạn.</p>
                             <!-- Hero-btn -->
                             <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
-                                <a href="{{asset('shop')}}" class="btn hero-btn">Shop Now</a>
+                                <a href="{{asset('shop')}}" class="btn hero-btn">Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         </div>
                         <img src="source/images/{{$new->brand_id}}/{{$new->image}}" alt="">
                         <div class="img-cap">
-                            <span>Thêm vào giỏ</span>
+                            <a href="{{url('cart/add/'.$new->product_id)}}"><span>Thêm vào giỏ</span></a>
                         </div>
                         <div class="favorit-items">
                             <span class="flaticon-heart"></span>
@@ -103,7 +103,7 @@
                         </div>
                         <img src="source/images/{{$sale->brand_id}}/{{$sale->image}}" alt="">
                         <div class="img-cap">
-                            <span>Thêm vào giỏ</span>
+                            <a href="{{url('cart/add/'.$sale->product_id)}}"><span>Thêm vào giỏ</span></a>
                         </div>
                         <div class="favorit-items">
                             <span class="flaticon-heart"></span>

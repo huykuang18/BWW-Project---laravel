@@ -146,8 +146,14 @@
           <div class="col-md-8 mt-sm-20">
             <h3 style="text-align: center;">{{$product->product_name}}</h3>
             <div class="row">
-                <b>Giới thiệu</b>
+                <b>Giới thiệu:</b>
                 <p>{{$product->desciption}}</p>
+                <b>Đơn giá: </b>&nbsp;&nbsp;&nbsp;
+                @if($product->price_discount==0)
+                <h5>{{number_format($product->price)}} vnđ</h5>
+                @else
+                <h5>{{number_format($product->price_discount)}} vnđ</h5>
+                @endif
             </div>
             <div class="card_area" style="text-align: center;">
                 <p>Chọn số lượng</p>
@@ -158,7 +164,6 @@
                         <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
                     </div>         
                 </div>
-                <p>{{number_format($product->price)}} vnđ</p>
                 <div class="add_to_cart">
                     <a href="#" class="btn_3">Thêm vào giỏ</a>
                 </div>

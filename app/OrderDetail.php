@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
-	protected $table = 'oder_details';
+	protected $table = 'order_details';
 
 	public function product(){
 		return $this->belongsTo('App\Product','product_id','product_id');
