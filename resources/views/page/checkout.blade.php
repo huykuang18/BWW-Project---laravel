@@ -24,39 +24,6 @@ $total=0;
   <!--================Checkout Area =================-->
   <section class="checkout_area section_padding">
     <div class="container">
-<!--     <div class="returning_customer">
-      <div class="check_title">
-        <h2>
-          Returning Customer?
-          <a href="#">Click here to login</a>
-        </h2>
-      </div>
-      <p>
-        If you have shopped with us before, please enter your details in the
-        boxes below. If you are a new customer, please proceed to the
-        Billing & Shipping section.
-      </p>
-      <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-        <div class="col-md-6 form-group p_star">
-          <input type="text" class="form-control" id="name" name="name" value=" " />
-          <span class="placeholder" data-placeholder="Username or Email"></span>
-        </div>
-        <div class="col-md-6 form-group p_star">
-          <input type="password" class="form-control" id="password" name="password" value="" />
-          <span class="placeholder" data-placeholder="Password"></span>
-        </div>
-        <div class="col-md-12 form-group">
-          <button type="submit" value="submit" class="btn_3">
-            log in
-          </button>
-          <div class="creat_account">
-            <input type="checkbox" id="f-option" name="selector" />
-            <label for="f-option">Remember me</label>
-          </div>
-          <a class="lost_pass" href="#">Lost your password?</a>
-        </div>
-      </form>
-    </div> -->
 <!--     <div class="cupon_area">
       <div class="check_title">
         <h2>
@@ -72,6 +39,7 @@ $total=0;
         <div class="col-lg-8">
           <h3>Thông tin chi tiết</h3>
           <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+            @if(!session('user'))
             <div class="col-md-12 form-group p_star">
               <label>Họ tên:</label>
               <input type="text" class="form-control" id="last" name="name" />
@@ -85,17 +53,34 @@ $total=0;
               <input type="text" class="form-control" id="email" name="email" />
             </div>
             <div class="col-md-12 form-group p_star">
-              <label>Địa chỉ:</label>
+              <label>Địa chỉ nhận:</label>
               <input type="text" class="form-control" id="address" name="address" />
             </div>
+            @else
+            <div class="col-md-12 form-group p_star">
+              <label>Người nhận hàng:</label>
+              <input type="text" class="form-control" id="last" name="name" value="{{$account->fullname}}" />
+            </div>
+            <div class="col-md-12 form-group p_star">
+              <label>Số điện thoại liên hệ:</label>
+              <input type="text" class="form-control" id="number" name="number" value="{{$account->mobile}}"/>
+            </div>
+            <div class="col-md-12 form-group p_star">
+              <label>Email:</label>
+              <input type="text" class="form-control" id="email" name="email" value="{{$account->email}}" disabled="true"/>
+            </div>
+            <div class="col-md-12 form-group p_star">
+              <label>Địa chỉ nhận:</label>
+              <input type="text" class="form-control" id="address" name="address" value="{{$account->address}}"/>
+            </div>
+            @endif
 <!--             <div class="col-md-12 form-group p_star">
               <input type="text" class="form-control" id="add2" name="add2" />
               <span class="placeholder" data-placeholder="Address line 02"></span>
             </div> -->
             <div class="col-md-12 form-group">
-
-              <textarea class="form-control" name="note" id="message" rows="1"
-              placeholder="Ghi chú"></textarea>
+              <label>Ghi chú:</label>
+              <textarea class="form-control" name="note" id="message" rows="3"></textarea>
             </div>
           </form>
         </div>

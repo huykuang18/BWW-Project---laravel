@@ -9,12 +9,12 @@ class Order extends Model
 	protected $table = 'orders';
 
 	public function order_detail(){
-		return $this->hasMany('App\OrderDetail','order_id','order_id');
+		return $this->hasMany('\App\OrderDetail','order_id','order_id');
 	}
 	public function payment_method(){
-		return $this->belongsTo('App\PaymentMethod','order_id','payment_method_id');
+		return $this->belongsTo('\App\PaymentMethod','payment_method_id','payment_method_id');
 	}
 	public function account(){
-		return $this->belongsTo('App\Account','order_id','account_id');
+		return $this->belongsTo('\App\Account','account_id','account_id');
 	}
 }

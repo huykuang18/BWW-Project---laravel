@@ -146,26 +146,28 @@
           <div class="col-md-8 mt-sm-20">
             <h3 style="text-align: center;">{{$product->product_name}}</h3>
             <div class="row">
-                <b>Giới thiệu:</b>
-                <p>{{$product->desciption}}</p>
-                <b>Đơn giá: </b>&nbsp;&nbsp;&nbsp;
-                @if($product->price_discount==0)
-                <h5>{{number_format($product->price)}} vnđ</h5>
-                @else
-                <h5>{{number_format($product->price_discount)}} vnđ</h5>
-                @endif
+              <b>Giới thiệu:</b>
+              <p>{{$product->desciption}}</p>
+              </div>
+            <div class="row">
+              <b>Trạng thái: </b>&nbsp;&nbsp;&nbsp;
+              @if($product->status==0)
+              <b style="color: #ccc;">tạm thời hết hàng</b>
+              @else
+              <b style="color: #2e454a;">còn hàng</b>
+              @endif
+            </div>
+            <div class="row">
+              <b>Đơn giá: </b>&nbsp;&nbsp;&nbsp;
+              @if($product->price_discount==0)
+              <b style="color: red;">{{number_format($product->price)}} vnđ</b>
+              @else
+              <b style="color: red;">{{number_format($product->price_discount)}} vnđ</b>
+              @endif
             </div>
             <div class="card_area" style="text-align: center;">
-                <p>Chọn số lượng</p>
-                <div class="product_count_area">
-                    <div class="product_count d-inline-block">
-                        <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                        <input class="product_count_item input-number" type="text" value="1" min="1" max="10">
-                        <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
-                    </div>         
-                </div>
                 <div class="add_to_cart">
-                    <a href="#" class="btn_3">Thêm vào giỏ</a>
+                    <a href="{{url('cart/add/'.$product->product_id)}}" class="btn_3">Thêm vào giỏ</a>
                 </div>
             </div>
         </div>

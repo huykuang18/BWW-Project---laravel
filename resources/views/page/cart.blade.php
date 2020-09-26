@@ -44,10 +44,11 @@ $total=0;
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="" />
+                      <a href="{{asset('shop/product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="" /></a>
                     </div>
                     <div class="media-body">
-                      <p>{{$product->product_name}}</p>
+                      <a href="{{asset('shop/product/'.$product->product_id)}}">
+                      <p>{{$product->product_name}}</p></a>
                     </div>
                   </div>
                 </td>

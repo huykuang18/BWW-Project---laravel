@@ -9,6 +9,6 @@ class Brand extends Model
     protected $table = 'brands';
 
     public function product(){
-    	return $this->hasMany('App\Product','product_id','brand_id');
+    	return $this->hasMany('App\Product','product_id','product_id');
     }
 }

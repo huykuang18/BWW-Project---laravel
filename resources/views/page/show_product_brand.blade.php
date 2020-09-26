@@ -24,7 +24,7 @@
                 <!--Nav Button  -->
                 <nav>             
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        @foreach($brand as $brand)
+                        @foreach($brands as $brand)
                         <a class="nav-item nav-link" id="nav-home-tab" href="{{asset('shop/brand/'.$brand->brand_id)}}" role="tab" aria-controls="nav-home" aria-selected="true"><img src="source/images/{{$brand->logo}}" alt=""></a>
                         @endforeach
                     </div>
@@ -52,16 +52,16 @@
         <div class="tab-content" id="nav-tabContent">
             <!-- card one -->
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                @if(count($product_type)==0)
+                @if(count($products)==0)
                 <p>Không có sản phẩm nào</p>
                 @else
-                <p>Trang này gồm {{count($product_type)}} sản phẩm của {{$brand_name->brand_name}}</p>
+                <p>Trang này gồm {{count($products)}} sản phẩm</p>
                 <div class="row">
-                    @foreach($product_type ?? '' as $product)
+                    @foreach($products ?? '' as $product)
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="">
+                                <a href="{{asset('shop/product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt=""></a>
                                 <div class="img-cap">
                                     <a href="{{url('cart/add/'.$product->product_id)}}"><span>Thêm vào giỏ</span></a>
                                 </div>
@@ -83,7 +83,7 @@
                     @endforeach
                 </div>
                 @endif
-                <div class="row">{{$product_type->links()}}</div>
+                <div class="row">{{$products->links()}}</div>
             </div>
         </div>
         <!-- End Nav Card -->

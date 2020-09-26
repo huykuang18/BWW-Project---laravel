@@ -37,7 +37,7 @@
                                         <a id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{asset('login')}}"><span class="flaticon-user">&nbsp;{{session('user')}}</span></a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <a href="{{asset('logout')}}" class="dropdown-item">Đăng xuất</a>
-                                            <a href="{{asset('user')}}" class="dropdown-item">Tài khoản của tôi</a>
+                                            <a href="{{asset('order/follow')}}" class="dropdown-item">Theo dõi đơn hàng</a>
                                         </div>
                                     </div>
                                 </li>

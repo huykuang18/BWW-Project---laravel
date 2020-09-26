@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Watch Shop</h2>
+                        <h2>Cửa hàng</h2>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="">
+                                <a href="{{asset('shop/product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt=""></a>
                                 <div class="img-cap">
                                     <a href="{{url('cart/add/'.$product->product_id)}}"><span>Thêm vào giỏ</span></a>
                                 </div>

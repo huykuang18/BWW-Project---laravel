@@ -28,11 +28,17 @@ class PageController extends Controller
 		return view('page.shop',compact('brand','products'));
 	}
 
-	public function getShop_brand($id){
-		$brand = Brand::Where('status',1)->get();
-		$product_type = Product::Where('brand_id',$id)->paginate(9);
-		$brand_name = Brand::Where('brand_id',$id)->first();
-		return view('page.show_product_brand',compact('brand','product_type','brand_name'));
+	public function search(Request $request,$type=null,$id=null)
+	{
+		if($type=='brand'){
+			$products = Product::Where('status',1)->Where('brand_id',$id)->paginate(9);
+			$brands = Brand::Where('status',1)->get();
+		}elseif ($type == 'keyword'){
+			$products=Product::where('status',1)->where('product_name','like','%'.$request->keyword.'%')->paginate(9);
+			$brands = Brand::Where('status',1)->get();
+		}
+		
+		return view('page.show_product_brand',compact('products','brands'));
 	}
 
 	public function getProductDetail($id){
@@ -156,7 +162,7 @@ class PageController extends Controller
 			endforeach;
 		endif;
 		session()->forget("cart");
-		return redirect('/')->with('alert','success');
+		return redirect('order/follow')->with('alert','success');
 
 	}
 
@@ -164,16 +170,23 @@ class PageController extends Controller
 		$account = Account::where('user_name',session('user'))->first();
 		$account_id=$account->account_id;
 		$orders=Order::where('account_id',$account_id)->get();
-		$count=Order::where('$account_id',$account_id)->count();
+		$count=Order::where('account_id',$account_id)->count();
 		return view('page.follow',compact('orders','count'));
 	}
 
 	public function orderDetail($id){
 		$account = Account::where('user_name',session('user'))->first();
 		$account_id=$account->account_id;
-		$order=Order::where('$account_id',$account_id)->where('order_id',$id)->first();
+		$order=Order::where('order_id',$id)->first();
 		$order_details=OrderDetail::where('order_id',$id)->get();
 		return view('page.orderDetail',compact('order','order_details'));
+	}
+
+	public function deleteOrder($id)
+	{
+		OrderDetail::Where('order_id',$id)->delete();
+		Order::Where('order_id',$id)->delete();
+		return redirect()->back();
 	}
 
 	/*-- end Checkout --*/
@@ -237,4 +250,5 @@ class PageController extends Controller
 	public function getBlog(){
 		return view('page.blog');
 	}
+
 }
