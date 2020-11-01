@@ -124,13 +124,21 @@ class PageController extends Controller
 			$order_id = $order->order_id;
 			foreach (array_keys(session('cart')) as $product_id):
 				$quantity = session("cart.$product_id.number");
-				$price = Product::where('product_id',$product_id)->first()->price;
+				$product = Product::where('product_id',$product_id)->first();
+				if ($product->price_discount == 0):
+					$price = $product->price;
+				else:
+					$price = $product->price_discount;
+				endif;
+				$qty = $product->quantity;
+				$qtynew = $qty-$quantity;
 				OrderDetail::insert([
 					'order_id'=>$order_id,
 					'product_id'=>$product_id,
 					'quantity'=>$quantity,
 					'price'=>$price
 				]);
+				Product::where('product_id',$product_id)->update(['quantity'=>$qtynew]);
 			endforeach;
 			session()->forget("cart");
 			return redirect('order/follow')->with('alert','success');
@@ -151,13 +159,21 @@ class PageController extends Controller
 			$order_id = $order->order_id;
 			foreach (array_keys(session('cart')) as $product_id):
 				$quantity = session("cart.$product_id.number");
-				$price = Product::where('product_id',$product_id)->first()->price;
+				$product = Product::where('product_id',$product_id)->first();
+				if ($product->price_discount == 0):
+					$price = $product->price;
+				else:
+					$price = $product->price_discount;
+				endif;
+				$qty = $product->quantity;
+				$qtynew = $qty-$quantity;
 				OrderDetail::insert([
 					'order_id'=>$order_id,
 					'product_id'=>$product_id,
 					'quantity'=>$quantity,
 					'price'=>$price
 				]);
+				Product::where('product_id',$product_id)->update(['quantity'=>$qtynew]);
 			endforeach;
 			session()->forget("cart");
 			return redirect('/')->with('alert','success');
@@ -183,6 +199,11 @@ class PageController extends Controller
 
 	public function deleteOrder($id)
 	{
+		$odts = OrderDetail::Where('order_id',$id)->get();
+		foreach ($odts as $odt):
+			$product = Product::Where('product_id',$odt->product_id)->first();
+			Product::Where('product_id',$odt->product_id)->update(['quantity'=>$product->quantity + $odt->quantity]);
+		endforeach;
 		OrderDetail::Where('order_id',$id)->delete();
 		Order::Where('order_id',$id)->delete();
 		return redirect()->back();
