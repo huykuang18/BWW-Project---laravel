@@ -42,36 +42,36 @@ $total=0;
             @if(!session('user'))
             <div class="col-md-12 form-group p_star">
               <label>Họ tên:</label>
-              <input type="text" class="form-control" id="last" name="name" />
+              <input type="text" class="form-control" id="last" name="name" required="" />
             </div>
             <div class="col-md-12 form-group p_star">
               <label>Số điện thoại:</label>
-              <input type="text" class="form-control" id="number" name="number" />
+              <input type="text" class="form-control" id="number" name="number" required="" />
             </div>
             <div class="col-md-12 form-group p_star">
               <label>Email:</label>
-              <input type="text" class="form-control" id="email" name="email" />
+              <input type="text" class="form-control" id="email" name="email" required="" />
             </div>
             <div class="col-md-12 form-group p_star">
               <label>Địa chỉ nhận:</label>
-              <input type="text" class="form-control" id="address" name="address" />
+              <input type="text" class="form-control" id="address" name="address" required="" />
             </div>
             @else
             <div class="col-md-12 form-group p_star">
               <label>Người nhận hàng:</label>
-              <input type="text" class="form-control" id="last" name="name" value="{{$account->fullname}}" />
+              <input type="text" class="form-control" id="last" name="name" value="{{$account->fullname}}" required="" />
             </div>
             <div class="col-md-12 form-group p_star">
               <label>Số điện thoại liên hệ:</label>
-              <input type="text" class="form-control" id="number" name="number" value="{{$account->mobile}}"/>
+              <input type="text" class="form-control" id="number" name="number" value="{{$account->mobile}}" required="" />
             </div>
             <div class="col-md-12 form-group p_star">
               <label>Email:</label>
-              <input type="text" class="form-control" id="email" name="email" value="{{$account->email}}" disabled="true"/>
+              <input type="text" class="form-control" id="email" name="email" value="{{$account->email}}" disabled="true" required="" />
             </div>
             <div class="col-md-12 form-group p_star">
               <label>Địa chỉ nhận:</label>
-              <input type="text" class="form-control" id="address" name="address" value="{{$account->address}}"/>
+              <input type="text" class="form-control" id="address" name="address" value="{{$account->address}}" required="" />
             </div>
             @endif
 <!--             <div class="col-md-12 form-group p_star">

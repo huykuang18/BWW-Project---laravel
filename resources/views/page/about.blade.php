@@ -22,17 +22,17 @@
 		<div class="row">
 			<div class="offset-xl-1 col-lg-8">
 				<div class="about-details-cap mb-50">
-					<h4>Our Mission</h4>
-					<p>Consectetur adipiscing elit, sued do eiusmod tempor ididunt udfgt labore et dolore magna aliqua. Quis ipsum suspendisces gravida. Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan lacus. Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan lacus.
+					<h4>Nhiệm vụ</h4>
+					<p>Ngày nay, chiếc đồng hồ dùng để xem giờ còn được xem như 1 món đồ trang sức. Đồng hồ là phụ kiện thời trang không thể thiếu góp phần tôn lên cá tính, phong cách của người dùng.
 					</p>
-					<p> Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan lacus. Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan.</p>
+					<p>BWW mang đến cho khách hàng những mẫu đồng hồ chất lượng tốt, thiết kế đẹp và đa dạng cùng giá thành tương đối mềm được nhiều bạn trẻ đánh giá cao và ưa chuộng. Đây là một sự lựa chọn lý tưởng dành cho những bạn trẻ thích phong cách thời trang.</p>
 				</div>
 
 				<div class="about-details-cap mb-50">
-					<h4>Our Vision</h4>
-					<p>Consectetur adipiscing elit, sued do eiusmod tempor ididunt udfgt labore et dolore magna aliqua. Quis ipsum suspendisces gravida. Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan lacus. Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan lacus.
+					<h4>Trách nhiệm</h4>
+					<p>BWW luôn luôn sẵn sàng phục vụ khách hàng, bảo hành lâu dài, đảm bảo chất lượng sản phẩm tốt nhất.
 					</p>
-					<p> Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan lacus. Risus commodo viverra sebfd dho eiusmod tempor maecenas accumsan.</p>
+					<p>Sự tin tưởng của khách hàng là thành công của chúng tôi.</p>
 				</div>
 			</div>
 		</div>
@@ -45,15 +45,8 @@
 		<div class="row align-items-center">
 			<div class="col-lg-12">
 				<div class="video-wrap">
-					<div class="play-btn "><a class="popup-video" href="https://www.youtube.com/watch?v=KMc6DyEJp04"><i class="fas fa-play"></i></a></div>
+					<div class="play-btn "><a class="popup-video" href="https://www.youtube.com/watch?v=QDFqsjoFFxo"><i class="fas fa-play"></i></a></div>
 				</div>
-			</div>
-		</div>
-		<!-- Arrow -->
-		<div class="thumb-content-box">
-			<div class="thumb-content">
-				<h3>Next Video</h3>
-				<a href="#"> <i class="flaticon-arrow"></i></a>
 			</div>
 		</div>
 	</div>

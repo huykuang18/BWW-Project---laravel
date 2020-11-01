@@ -55,10 +55,10 @@ $quantity=0;
               <p>Email</p><span>: {{$order->account->email}}</span>
             </li>
             <li>
-              <p>country</p><span>: United States</span>
+              <p>Địa chỉ</p><span>: {{$order->account->address}}</span>
             </li>
             <li>
-              <p>postcode</p><span>: 36952</span>
+              <p>SĐT</p><span>: {{$order->account->mobile}}</span>
             </li>
           </ul>
         </div>

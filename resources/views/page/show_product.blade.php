@@ -38,11 +38,10 @@
             <div class="select-this">
                 <form action="#">
                     <div class="select-itms">
-                        <select name="select" id="select1">
-                            <option value="">40 per page</option>
-                            <option value="">50 per page</option>
-                            <option value="">60 per page</option>
-                            <option value="">70 per page</option>
+                        <select name="select" id="select1" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                            <option value="shop">Mặc định</option>
+                            <option value="shop/price/desc">Giá giảm dần</option>
+                            <option value="shop/price/asc">Giá tăng dần</option>
                         </select>
                     </div>
                 </form>
@@ -61,7 +60,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-popular-items mb-50 text-center">
                             <div class="popular-img">
-                                <a href="{{asset('shop/product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt=""></a>
+                                <a href="{{asset('product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt=""></a>
                                 <div class="img-cap">
                                     <a href="{{url('cart/add/'.$product->product_id)}}"><span>Thêm vào giỏ</span></a>
                                 </div>
@@ -70,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="popular-caption">
-                                <h3><a href="{{asset('shop/product/'.$product->product_id)}}">{{$product->product_name}}</a></h3>
+                                <h3><a href="{{asset('product/'.$product->product_id)}}">{{$product->product_name}}</a></h3>
                                 @if($product->price_discount==0)
                                 <span>{{number_format($product->price)}} vnđ</span>
                                 @else

@@ -47,7 +47,7 @@
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-btn">+</div>
             <form class="search-model-form" method="get" action="{{url('shop/keyword/key')}}">
-                <input type="text" id="search-input" name="keyword" placeholder="Nhập từ khóa.....">
+                <input type="text" id="search-input" name="keyword" placeholder="Tìm kiếm sản phẩm...">
             </form>
         </div>
     </div>

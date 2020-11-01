@@ -1,6 +1,12 @@
 @extends('master')
 @section('title','Trang chủ')
 @section('content')
+@if(session('alert'))
+<script>
+    alert("Hàng đã đặt thành công! Chúng tôi sẽ liên hệ qua sđt để giao hàng sớm nhất cho bạn");
+    location = '/';
+</script>
+@endif
 <!--? slider Area Start -->
 <div class="slider-area ">
     <div class="slider-active">
@@ -49,7 +55,7 @@
                         <div class="ribbon">
 
                         </div>
-                        <img src="source/images/{{$new->brand_id}}/{{$new->image}}" alt="">
+                        <a href="{{asset('product/'.$new->product_id)}}"><img src="source/images/{{$new->brand_id}}/{{$new->image}}" alt=""></a>
                         <div class="img-cap">
                             <a href="{{url('cart/add/'.$new->product_id)}}"><span>Thêm vào giỏ</span></a>
                         </div>
@@ -58,7 +64,7 @@
                         </div>
                     </div>
                     <div class="popular-caption">
-                        <h3><a href="{{asset('shop/product/'.$new->product_id)}}">{{$new->product_name}}</a></h3>
+                        <h3><a href="{{asset('product/'.$new->product_id)}}">{{$new->product_name}}</a></h3>
                         @if($new->price_discount==0)
                         <span>{{number_format($new->price)}} vnđ</span>
                         @else

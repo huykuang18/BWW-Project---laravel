@@ -150,14 +150,6 @@
               <p>{{$product->desciption}}</p>
               </div>
             <div class="row">
-              <b>Trạng thái: </b>&nbsp;&nbsp;&nbsp;
-              @if($product->status==0)
-              <b style="color: #ccc;">tạm thời hết hàng</b>
-              @else
-              <b style="color: #2e454a;">còn hàng</b>
-              @endif
-            </div>
-            <div class="row">
               <b>Đơn giá: </b>&nbsp;&nbsp;&nbsp;
               @if($product->price_discount==0)
               <b style="color: red;">{{number_format($product->price)}} vnđ</b>
@@ -165,11 +157,22 @@
               <b style="color: red;">{{number_format($product->price_discount)}} vnđ</b>
               @endif
             </div>
+            <div class="row">
+              <b>Trạng thái: </b>&nbsp;&nbsp;&nbsp;
+              @if($product->quantity==0)
+              <b style="color: #ccc;">tạm thời hết hàng</b>
+              @else
+              <b style="color: blue;">còn hàng</b> <p>( {{$product->quantity}} sản phẩm )</p>
+              @endif
+            </div>
+            @if($product->quantity==0)
+            @else
             <div class="card_area" style="text-align: center;">
                 <div class="add_to_cart">
                     <a href="{{url('cart/add/'.$product->product_id)}}" class="btn_3">Thêm vào giỏ</a>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

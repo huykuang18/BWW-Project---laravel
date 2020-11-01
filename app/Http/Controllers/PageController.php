@@ -23,9 +23,9 @@ class PageController extends Controller
 	}
 
 	public function getShop(){
-		$brand = Brand::Where('status',1)->get();
+		$brands = Brand::Where('status',1)->get();
 		$products = Product::Where('status',1)->paginate(12);
-		return view('page.shop',compact('brand','products'));
+		return view('page.show_product',compact('brands','products'));
 	}
 
 	public function search(Request $request,$type=null,$id=null)
@@ -36,9 +36,14 @@ class PageController extends Controller
 		}elseif ($type == 'keyword'){
 			$products=Product::where('status',1)->where('product_name','like','%'.$request->keyword.'%')->paginate(9);
 			$brands = Brand::Where('status',1)->get();
+		}elseif ($type=='price'){
+			$products = Product::Where('status',1)->orderBy('price', $id)->paginate(9);
+			$brands = Brand::Where('status',1)->get();
+		}else{
+			$products = Product::Where('status',1)->paginate(12);
+			$brands = Brand::Where('status',1)->get();
 		}
-		
-		return view('page.show_product_brand',compact('products','brands'));
+		return view('page.show_product',compact('products','brands'));
 	}
 
 	public function getProductDetail($id){
@@ -57,14 +62,6 @@ class PageController extends Controller
 	/* -- Cart --*/
 	public function cart($action=null,$id=null,Request $request){
 		switch ($action) {
-			// case 'order':
-			// if (session('user')):
-			// 	return redirect('order');
-			// else:
-			// 	return redirect('login');
-			// endif;
-			// break;
-
 			case 'update':
 			foreach (array_keys(session('cart')) as $key) {
 				session([
@@ -135,6 +132,8 @@ class PageController extends Controller
 					'price'=>$price
 				]);
 			endforeach;
+			session()->forget("cart");
+			return redirect('order/follow')->with('alert','success');
 		else:
 			$method_id=$request->methodId;
 			$name=$request->name;
@@ -160,9 +159,9 @@ class PageController extends Controller
 					'price'=>$price
 				]);
 			endforeach;
+			session()->forget("cart");
+			return redirect('/')->with('alert','success');
 		endif;
-		session()->forget("cart");
-		return redirect('order/follow')->with('alert','success');
 
 	}
 
