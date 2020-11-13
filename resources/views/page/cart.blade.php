@@ -3,7 +3,7 @@
 @section('content')
 @if(session('cart'))
 <?php
-$products=DB::table('products')->whereIn('product_id',array_keys(session('cart')))->get();
+$products=DB::table('product')->whereIn('product_id',array_keys(session('cart')))->get();
 $total=0;
 ?>
 <!-- Hero Area Start-->
@@ -44,10 +44,10 @@ $total=0;
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <a href="{{asset('shop/product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="" /></a>
+                      <a href="{{asset('product/'.$product->product_id)}}"><img src="source/images/{{$product->brand_id}}/{{$product->image}}" alt="" /></a>
                     </div>
                     <div class="media-body">
-                      <a href="{{asset('shop/product/'.$product->product_id)}}">
+                      <a href="{{asset('product/'.$product->product_id)}}">
                       <p>{{$product->product_name}}</p></a>
                     </div>
                   </div>
@@ -56,7 +56,7 @@ $total=0;
                   @if($product->price_discount==0)
                   <h5>{{number_format($product->price)}}</h5>
                   @else
-                  <h5>{{number_format($product->price_discount)}}</h5>
+                  <h5>{{number_format($product->price*(100-$product->price_discount)/100)}}</h5>
                   @endif
                 </td>
                 <td>
@@ -68,7 +68,7 @@ $total=0;
                   @if($product->price_discount==0)
                   <h5>{{number_format($product->price*session("cart.$product->product_id.number"))}}</h5>
                   @else
-                  <h5>{{number_format($product->price_discount*session("cart.$product->product_id.number"))}}</h5>
+                  <h5>{{number_format(($product->price*(100-$product->price_discount)/100)*session("cart.$product->product_id.number"))}}</h5>
                   @endif
                 </td>
                 <td>
@@ -79,7 +79,7 @@ $total=0;
               <?php if ($product->price_discount==0) {
                 $total = $total + $product->price*session("cart.$product->product_id.number");
               }else{
-                $total = $total + $product->price_discount*session("cart.$product->product_id.number");
+                $total = $total + ($product->price*(100-$product->price_discount)/100)*session("cart.$product->product_id.number");
               }
               ?>
               @endforeach

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table = 'products';
+    protected $table = 'product';
 
     public function brand(){
     	return $this->belongsTo('App\Brand','brand_id','brand_id');

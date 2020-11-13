@@ -154,7 +154,7 @@
               @if($product->price_discount==0)
               <b style="color: red;">{{number_format($product->price)}} vnđ</b>
               @else
-              <b style="color: red;">{{number_format($product->price_discount)}} vnđ</b>
+              <b style="color: red;">{{number_format($product->price*(100-$product->price_discount)/100)}} vnđ</b>
               @endif
             </div>
             <div class="row">

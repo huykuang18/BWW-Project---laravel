@@ -69,7 +69,7 @@
                         <span>{{number_format($new->price)}} vnđ</span>
                         @else
                         <span style="text-decoration: line-through;color: #ccc;">{{number_format($new->price)}} vnđ</span>
-                        <span>{{number_format($new->price_discount)}} vnđ</span>
+                        <span>{{number_format($new->price*(100-$new->price_discount)/100)}} vnđ</span>
                         @endif
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                     <div class="popular-caption">
                         <h3><a href="{{asset('shop/product/'.$sale->product_id)}}">{{$sale->product_name}}</a></h3>
                         <span style="text-decoration: line-through; color: #ccc;">{{number_format($sale->price)}} vnđ</span>
-                        <span>{{number_format($sale->price_discount)}} vnđ</span>
+                        <span>{{number_format($sale->price*(100-$sale->price_discount)/100)}} vnđ</span>
                     </div>
                 </div>
             </div>

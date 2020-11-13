@@ -2,7 +2,7 @@
 @section('title','Thanh toán');
 @section('content')
 <?php
-$products=DB::table('products')->whereIn('product_id',array_keys(session('cart')))->get();
+$products=DB::table('product')->whereIn('product_id',array_keys(session('cart')))->get();
 $total=0;
 ?>
 <!-- Hero Area Start-->
@@ -95,19 +95,19 @@ $total=0;
               </li>
               @foreach($products as $product)
               <li>
-                <a href="{{asset('shop/product/'.$product->product_id)}}">{{$product->product_name}}
+                <a href="{{asset('product/'.$product->product_id)}}">{{$product->product_name}}
                   <span class="middle">x {{session("cart.$product->product_id.number")}}</span>
                   @if($product->price_discount==0)
                   <span class="last">{{number_format($product->price*session("cart.$product->product_id.number"))}}</span>
                   @else
-                  <span class="last">{{number_format($product->price_discount*session("cart.$product->product_id.number"))}}</span>
+                  <span class="last">{{number_format(($product->price*(100-$product->price_discount)/100)*session("cart.$product->product_id.number"))}}</span>
                   @endif
                 </a>
               </li>
               <?php if ($product->price_discount==0) {
                 $total = $total + $product->price*session("cart.$product->product_id.number");
               }else{
-                $total = $total + $product->price_discount*session("cart.$product->product_id.number");
+                $total = $total + ($product->price*(100-$product->price_discount)/100)*session("cart.$product->product_id.number");
               }
               ?>
               @endforeach

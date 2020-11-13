@@ -26,7 +26,7 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach($brands as $brand)
                         <a class="nav-item nav-link" id="nav-home-tab" href="{{asset('shop/brand/'.$brand->brand_id)}}" role="tab" aria-controls="nav-home" aria-selected="true"><img src="source/images/{{$brand->logo}}" alt=""></a>
-                        @endforeach
+                        @endforeach         
                     </div>
                 </nav>
                 <!--End Nav Button  -->
@@ -74,7 +74,7 @@
                                 <span>{{number_format($product->price)}} vnđ</span>
                                 @else
                                 <span style="text-decoration: line-through;color: #ccc;">{{number_format($product->price)}} vnđ</span>
-                                <span>{{number_format($product->price_discount)}} vnđ</span>
+                                <span>{{number_format($product->price*(100-$product->price_discount)/100)}} vnđ</span>
                                 @endif
                             </div>
                         </div>

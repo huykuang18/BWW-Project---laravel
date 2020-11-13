@@ -24,23 +24,23 @@ class PageController extends Controller
 
 	public function getShop(){
 		$brands = Brand::Where('status',1)->get();
-		$products = Product::Where('status',1)->paginate(12);
+		$products = Product::paginate(12);
 		return view('page.show_product',compact('brands','products'));
 	}
 
 	public function search(Request $request,$type=null,$id=null)
 	{
 		if($type=='brand'){
-			$products = Product::Where('status',1)->Where('brand_id',$id)->paginate(9);
+			$products = Product::Where('brand_id',$id)->paginate(9);
 			$brands = Brand::Where('status',1)->get();
 		}elseif ($type == 'keyword'){
-			$products=Product::where('status',1)->where('product_name','like','%'.$request->keyword.'%')->paginate(9);
+			$products=Product::where('product_name','like','%'.$request->keyword.'%')->paginate(9);
 			$brands = Brand::Where('status',1)->get();
 		}elseif ($type=='price'){
-			$products = Product::Where('status',1)->orderBy('price', $id)->paginate(9);
+			$products = Product::orderBy('price', $id)->paginate(9);
 			$brands = Brand::Where('status',1)->get();
 		}else{
-			$products = Product::Where('status',1)->paginate(12);
+			$products = Product::paginate(12);
 			$brands = Brand::Where('status',1)->get();
 		}
 		return view('page.show_product',compact('products','brands'));
@@ -244,7 +244,7 @@ class PageController extends Controller
 	public function postRegister(Request $request)
 	{
 		$username=$request->input('username');
-		$result=DB::table('accounts')->where('user_name',$username)->first();
+		$result=Account::where('user_name',$username)->first();
 		if ($result!=null) {
 			$alert='Tên người dùng đã tồn tại.Vui lòng thử 1 tên khác';
 			return redirect()->back()->with('alert',$alert);
